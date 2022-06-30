@@ -9,8 +9,9 @@ public class ScheduleId implements Serializable {
 //
 //    private int course;
 
-    private int professor_id;
+
     private int course_id;
+    private int professor_id;
     private int semester;
     private int year_taught;
 

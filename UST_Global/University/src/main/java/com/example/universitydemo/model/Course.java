@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="course")
+@Table(name = "course")
 public class Course {
 
     @Id
@@ -21,14 +21,14 @@ public class Course {
     private List<Schedule> schedules;
     private int credits;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Schedule> schedules;
-
     public Course() {
     }
 
-    public Course(String name, int credits) {
+    public Course(int id, String name, Department department, List<Schedule> schedules, int credits) {
+        this.id = id;
         this.name = name;
+        this.department = department;
+        this.schedules = schedules;
         this.credits = credits;
     }
 
@@ -48,20 +48,27 @@ public class Course {
         this.name = name;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
     public int getCredits() {
         return credits;
     }
 
     public void setCredits(int credits) {
         this.credits = credits;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", credits=" + credits +
-                '}';
     }
 }

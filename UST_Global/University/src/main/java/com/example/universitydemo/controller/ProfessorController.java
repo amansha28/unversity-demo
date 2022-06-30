@@ -1,54 +1,39 @@
 package com.example.universitydemo.controller;
 
 
-import com.example.universitydemo.dao.ProfessorDao;
-import com.example.universitydemo.dao.ScheduleDao;
 import com.example.universitydemo.model.Professor;
-import com.example.universitydemo.model.ProfessorCourses;
 import com.example.universitydemo.model.ProfessorCoursesResult;
+import com.example.universitydemo.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
 
 @RestController
 public class ProfessorController {
 
     @Autowired
-    ProfessorDao professorDao;
-
-    @Autowired
-    ScheduleDao scheduleDao;
+    ProfessorService professorService;
 
     @GetMapping("/professors")
-    public List<Professor> getAllProfessor(){
-        return professorDao.findAll();
+    public List<Professor> getAllProfessor() {
+
+        return professorService.getAllProfessors();
+    }
+
+    @PostMapping("/professors")
+    public Professor addProfessor(@RequestBody Professor professor) {
+        return professorService.addProfessor(professor);
+    }
+
+    @DeleteMapping("/professors/{id}")
+    public void removeProfessor(@PathVariable("id") int profId) {
+        professorService.removeProfessor(profId);
     }
 
     @GetMapping("/search")
-    public List<ProfessorCoursesResult> getAllProfessorCourses(){
-        Map<String, Set<String>> resultMap = new HashMap<>();
-        List<ProfessorCourses> list =  scheduleDao.getAllProfessorCourses();
-        for(int i=0;i<list.size();i++)
-        {
-            ProfessorCourses tempCourse = list.get(i);
-            if(!resultMap.containsKey(tempCourse.getName())){
-                resultMap.put(tempCourse.getName(),tempCourse.getCourses());
-            }else{
-                Set<String> tempSet = resultMap.get(tempCourse.getName());
-                tempSet.addAll(tempCourse.getCourses());
-                resultMap.put(tempCourse.getName(),tempSet);
-            }
-        }
-
-        List<ProfessorCoursesResult> profCoursesList = new ArrayList<>();
-        for (Map.Entry<String,Set<String>> entry : resultMap.entrySet())
-            profCoursesList.add(new ProfessorCoursesResult(entry.getKey(), entry.getValue()));
-
-        System.out.println("Size : "+profCoursesList.size());
-        return profCoursesList;
+    public List<ProfessorCoursesResult> getAllProfessorCourses() {
+        return professorService.getAllProfessorCourses();
     }
 
 }

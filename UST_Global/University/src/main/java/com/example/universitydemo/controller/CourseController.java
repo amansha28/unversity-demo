@@ -1,10 +1,9 @@
 package com.example.universitydemo.controller;
 
-import com.example.universitydemo.dao.CourseDao;
 import com.example.universitydemo.model.Course;
+import com.example.universitydemo.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,10 +11,21 @@ import java.util.List;
 public class CourseController {
 
     @Autowired
-    CourseDao courseDao;
+    CourseService courseService;
 
     @GetMapping("/courses")
-    public List<Course> getAllCourses(){
-        return courseDao.findAll();
+    public List<Course> getAllCourses() {
+        return courseService.getAllCourses();
+    }
+
+
+    @PostMapping("/courses")
+    public Course addCourse(@RequestBody Course course) {
+        return courseService.addCourse(course);
+    }
+
+    @DeleteMapping("/courses/{id}")
+    public void removeCourseById(@PathVariable("id") int courseId) {
+        courseService.removeCourseById(courseId);
     }
 }

@@ -4,15 +4,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="department")
+@Table(name = "department")
 public class Department {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
@@ -22,6 +21,16 @@ public class Department {
     private List<Course> courses;
 
     public Department() {
+    }
+    public Department(String name, List<Professor> professors, List<Course> courses) {
+        this.name = name;
+        this.professors = professors;
+        this.courses = courses;
+    }
+
+    public Department(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Department(String name) {

@@ -4,19 +4,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="PROFESSOR")
+@Table(name = "PROFESSOR")
 public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
     private int id;
 
-    @Column(name="name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name="department_id", referencedColumnName = "id")
+//    @ManyToOne(cascade = CascadeType.ALL) // Case :1 - create corresponding dept is it doesnt exists.
+    @ManyToOne // Case 2 : dept should exist, else gives EntityNotFoundException
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
     @OneToMany

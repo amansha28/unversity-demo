@@ -1,9 +1,9 @@
 package com.example.universitydemo.dao;
 
-import com.example.universitydemo.model.Professor;
+import com.example.universitydemo.model.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProfessorDao extends JpaRepository<Professor,Integer> {
+public interface DepartmentRepo extends JpaRepository<Department, Integer> {
 }
