@@ -17,14 +17,16 @@ public class Schedule {
     @Id
     private int professor_id;
 
-//    @Id
-//    @ManyToOne()
-//    private Professor professor;
-//
-//
-//    @Id
-//    @ManyToOne()
-//    private Course course;
+
+    // This can be used with Case 3 as mentioned in Professor and Course Entity classes.
+  /*  @Id
+    @ManyToOne()
+    private Professor professor;
+
+
+    @Id
+    @ManyToOne()
+    private Course course;*/
 
     @Id
     private int semester;

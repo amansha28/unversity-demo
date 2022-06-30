@@ -13,13 +13,16 @@ public class Professor {
 
     private String name;
 
-//    @ManyToOne(cascade = CascadeType.ALL) // Case :1 - create corresponding dept is it doesnt exists.
-    @ManyToOne // Case 2 : dept should exist, else gives EntityNotFoundException
+    @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
+    // Case :1 - create corresponding dept is it doesnt exists.
+    //    @ManyToOne(cascade = CascadeType.ALL)
+    // Case 2 : dept should exist, else gives EntityNotFoundException
     @OneToMany
-//    @OneToMany(mappedBy = "professor",cascade = CascadeType.ALL)
+    // Case 3 : This cen be used creating extra tables of PROFESSOR_SCHEDULES
+    //    @OneToMany(mappedBy = "professor",cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
 

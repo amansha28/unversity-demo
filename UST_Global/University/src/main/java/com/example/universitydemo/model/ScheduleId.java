@@ -3,13 +3,10 @@ package com.example.universitydemo.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+/*
+* Class to create Composite Key for the Schedule Entity : course_id + professor_id + semester + year_taught
+* */
 public class ScheduleId implements Serializable {
-
-//    private int professor;
-//
-//    private int course;
-
-
     private int course_id;
     private int professor_id;
     private int semester;
